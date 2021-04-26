@@ -1,0 +1,49 @@
+﻿
+box {
+    background-color: white;
+    width: 55%;
+    padding: 0 10px;
+    margin: 22px;
+    float: left;
+}
+
+#boxes {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+#column1 {
+    background-color: white;
+    width: 31%;
+}
+
+#column2 {
+    float: left;
+    background-color: white;
+    width: 61%;
+    display: inline-block;
+    margin: 20px;
+}
+
+
+
+search {
+    background-color: lightgrey;
+    width: 1500px;
+    border: 15px;
+    padding: 50px;
+    margin: 20px;
+    display: inline-block;
+}
+
+filter {
+    background-color: lightgrey;
+    width: 600px;
+    border: 15px;
+    padding: 50px;
+    margin: 20px;
+    display: table;
+    float: left;
+}
