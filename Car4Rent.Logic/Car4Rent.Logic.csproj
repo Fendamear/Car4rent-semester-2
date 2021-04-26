@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Car4rent.Factory\Car4rent.Factory.csproj" />
+    <ProjectReference Include="..\Car4Rent.Interfaces\Car4Rent.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
