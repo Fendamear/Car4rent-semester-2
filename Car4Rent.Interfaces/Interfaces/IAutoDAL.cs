@@ -9,6 +9,7 @@ namespace Car4Rent.Interfaces.Interfaces
     {
         List<AutoDTO> GetAll();
 
+        AutoDTO GetByID(int autoID);
         void AutoToevoegen(AutoDTO autoDTO);
 
     }

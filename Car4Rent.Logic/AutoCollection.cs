@@ -32,6 +32,27 @@ namespace Car4Rent.Logic
             return auto;
         }
 
+        public Auto GetAuto(int id)
+        {
+            var autoDTO = AutoDataAcces.GetByID(id);
+
+            return new Auto
+            {
+                AutoID = autoDTO.autoID,
+                type = autoDTO.type,
+                Merk = autoDTO.Merk,
+                Kenteken = autoDTO.Kenteken,
+                bouwjaar = autoDTO.bouwjaar,
+                KM_stand = autoDTO.KM_stand,
+                Brandstof = autoDTO.Brandstof,
+                Zitplaatsen = autoDTO.Zitplaatsen,
+                Versnellingsbak = autoDTO.Versnellingsbak,
+                Url = autoDTO.Url,
+                prijs = autoDTO.prijs
+            };
+        }
+
+
 
         public void Create(Auto auto)
         {

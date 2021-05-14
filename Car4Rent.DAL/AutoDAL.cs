@@ -29,6 +29,23 @@ namespace Car4Rent.DAL
             return autoDTOs;
         }
 
+        public AutoDTO GetByID(int autoID)
+        {
+            SqlCommand getCar = new SqlCommand("select AutoID, merk,type_,KM_stand,Kenteken,Bouwjaar,Brandstof, Zitplaatsen, Versnellingsbak, url_, prijs from Auto_  WHERE AutoID = @AutoID");
+
+            getCar.Parameters.AddWithValue("@AutoID", autoID);
+
+            DataTable dataTable = dbs.Query(getCar);
+            AutoDTO autoDTO = new AutoDTO();
+
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                autoDTO = AutoDTOfill(autoDTO, dataRow);
+            }
+
+            return autoDTO;
+        }
+
         private AutoDTO AutoDTOfill(AutoDTO autoDTO, DataRow dataRow)
         {
             autoDTO.type = Convert.ToString(dataRow["type_"]);

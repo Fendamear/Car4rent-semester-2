@@ -8,6 +8,8 @@ namespace Sofware_semester_2_Car4Rent.Models
 {
     public class AutoViewModel
     {
+
+        public int AutoID { get; set; }
         [Required]
         public string type { get; set; }
         [Required]

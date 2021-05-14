@@ -4,6 +4,7 @@ namespace Car4Rent.Logic
 {
     public class Auto
     {
+        public int AutoID { get; set; }
         public string type { get; set; }
 
         public string Merk { get; set; }
