@@ -1,0 +1,203 @@
+﻿@using Sofware_semester_2_Car4Rent.Controllers;
+@model Sofware_semester_2_Car4Rent.Models.AutoBoekingViewModel
+
+@{
+    ViewData["Title"] = "GetCar";
+}
+
+@{ 
+    AutoController autoController = new AutoController();
+}
+
+<h1>GetCar</h1>
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        box {
+            background-color: white;
+            width: 55%;
+            padding: 0 10px;
+            margin: 22px;
+            float: left;
+        }
+
+        #column1 {
+            background-color: lightcyan;
+            width: 36%;
+        }
+
+        #column2 {
+            float: left;
+            background-color: lightcyan;
+            width: 25%;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        #column3 {
+            float: left;
+            background-color: lightcyan;
+            width: 25%;
+            display: inline-block;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <box id="column1">
+        <img src="@Html.DisplayFor(model => model.url)" style="width:110%; height: 110%;" alt="...">
+    </box>
+    <box id="column2">
+        <h1>@Html.DisplayFor(model => model.Merk) @Html.DisplayFor(model => model.type)</h1>
+        <br />
+        <h2>Over de Auto</h2>
+        <p>Brandstof: @Html.DisplayFor(model => model.Brandstof)</p>
+        <p>Versnellingsbak: @Html.DisplayFor(model => model.Versnellingsbak)</p>
+        <p>Zitplaatsen: @Html.DisplayFor(model => model.Zitplaatsen)</p>
+        <p>Bouwjaar: @Html.DisplayFor(model => model.bouwjaar)</p>
+        <p>Kenteken: @Html.DisplayFor(model => model.Kenteken)</p>
+        <p>KM Stand: @Html.DisplayFor(model => model.KM_stand)</p>
+        <br />
+        <h3>Prijs per dag:</h3>
+        <p>€@Html.DisplayFor(model => model.prijs)</p>
+    </box>
+    <box id="column3">
+
+        <h1>Datum geboekt</h1>
+        <p>Begindatum: @Html.DisplayFor(Model => Model.begindatum)</p>
+        <p>Begindatum: @Html.DisplayFor(Model => Model.einddatum)</p>
+        <button class="w3-button w3-dark-grey" id="check">Zoek beschikbaarheid</button>
+
+
+        @*@if (autoController.checkAuto(Model.begindatum, Model.einddatum))
+        {
+            Console.WriteLine("dit is een test message");
+        }
+        else
+        {
+            Console.WriteLine( "het is helaas nog niet helemaal gelukt");
+        }*@
+
+    </box>
+
+    <script type="text/javascript">
+            var ButtonTest = document.getElementById("check")
+
+            ButtonTest.onclick = function () {
+                @if (autoController.checkAuto())
+                {
+                    Console.WriteLine("gelukt!");
+                }
+                else
+                {
+                    Console.WriteLine("bijna...");
+                }
+            }
+
+    </script>
+
+
+    @section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+        }
+</body>
+<script type="text/javascript">
+            var ButtonTest = document.getElementById("check")
+
+            ButtonTest.onclick = function () {
+                @if (autoController.checkAuto())
+                {
+                    Console.WriteLine("gelukt!");
+                }
+                else
+                {
+                    Console.WriteLine("bijna...");
+                }
+            }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+@*<div>
+    <h4>AutoViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AutoID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AutoID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.type)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Merk)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Merk)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kenteken)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kenteken)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.bouwjaar)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.bouwjaar)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KM_stand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KM_stand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Brandstof)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Brandstof)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zitplaatsen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zitplaatsen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Versnellingsbak)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Versnellingsbak)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.url)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.url)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.prijs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.prijs)
+        </dd>
+    </dl>
+</div>*@
+

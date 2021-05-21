@@ -7,7 +7,7 @@ namespace Car4Rent.Interfaces.Interfaces
 {
     public interface IAutoDAL
     {
-        List<AutoDTO> GetAll();
+        List<AutoDTO> GetAll(string begindatum, string einddatum);
 
         AutoDTO GetByID(int autoID);
         void AutoToevoegen(AutoDTO autoDTO);

@@ -13,9 +13,14 @@ namespace Car4Rent.DAL
     {
         private DatabaseDAL dbs = new DatabaseDAL();
 
-        public List<AutoDTO> GetAll()
+        public List<AutoDTO> GetAll(string begindatum, string einddatum)
         {
-            SqlCommand getAutos = new SqlCommand($"select merk,type_,KM_stand,Kenteken,Bouwjaar,Brandstof, Zitplaatsen, Versnellingsbak, url_, prijs from Auto_ ");
+            SqlCommand getAutos = new SqlCommand($"select AutoID, merk,type_,KM_stand,Kenteken,Bouwjaar,Brandstof, Zitplaatsen, Versnellingsbak, url_, prijs from Auto_ " +
+                                                 $"where AutoID not in (select distinct a.AutoID from Auto_ a left join boeking b on b.AutoID = a.AutoID " +
+                                                 $"where '{begindatum}' <= b.Einddatum and b.Begindatum <= '{einddatum}')");
+
+            getAutos.Parameters.AddWithValue("@Datum1", begindatum);
+            getAutos.Parameters.AddWithValue("@Datum2", einddatum);
 
             DataTable dataTable = dbs.Query(getAutos);
             List<AutoDTO> autoDTOs = new List<AutoDTO>();
@@ -48,6 +53,7 @@ namespace Car4Rent.DAL
 
         private AutoDTO AutoDTOfill(AutoDTO autoDTO, DataRow dataRow)
         {
+            autoDTO.autoID = Convert.ToInt32(dataRow["AutoID"]);
             autoDTO.type = Convert.ToString(dataRow["type_"]);
             autoDTO.Merk = Convert.ToString(dataRow["merk"]);
             autoDTO.Kenteken = Convert.ToString(dataRow["Kenteken"]);

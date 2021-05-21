@@ -1,6 +1,10 @@
-﻿@model IEnumerable<Sofware_semester_2_Car4Rent.Models.AutoViewModel>
+﻿@model IEnumerable<Sofware_semester_2_Car4Rent.Models.AutoBoekingViewModel>
 @{
     ViewData["Title"] = "GetAllcars";
+}
+
+@{ 
+    
 }
 
 <h1>GetAllcars</h1>
@@ -31,33 +35,37 @@
     <Search>
 
         <div class="w3-container w3-white w3-padding-16">
-            <form action="/action_page.php" target="_blank">
+            @foreach (var datum in Model)
+            {
+                <th>Begindatum:</th>
+                <br />
+                <th>
+                    @datum.begindatum
+                </th>
+                <br />
+                <th>Einddatum</th>
+                <br />
+                <th>
+                    @datum.einddatum
+                </th>
+                <br />
+                @Html.ActionLink("Datum wijzigen", "Index", "Home")
+                break;
 
-                <div class="w3-row-padding" style="margin:8px -16px;">
-                    <div class="w3-half w3-margin-bottom">
-                        <label><i class="fa fa-location-arrow"></i> Locatie</label>
-                        <input class="w3-input w3-border" type="Text" placeholder="locatie" name="locatie">
-                    </div>
-                </div>
-                <div class="w3-row-padding" style="margin:0 -16px;">
-                    <div class="w3-half w3-margin-bottom">
-                        <label><i class="fa fa-calendar-o"></i> Ophalen</label>
-                        <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="CheckIn" required>
-                    </div>
-                    <div class="w3-half">
-                        <label><i class="fa fa-calendar-o"></i> terugbrengen</label>
-                        <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="CheckOut" required>
-                    </div>
-                </div>
-                <button class="w3-button w3-dark-grey" type="submit" class="fa fa-search w3-margin-right"></i> Zoek beschikbaarheid</button>
-            </form>
+
+            }
         </div>
 
     </Search>
 
     <h2>Test</h2>
     <box id="column1">
-
+        <th>
+            @Html.DisplayNameFor(model => model.begindatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.einddatum)
+        </th> 
 
     </box>
 
@@ -74,7 +82,10 @@
                             <h1 class="card-title">@item.Merk @item.type</h1>
                             <p>@item.Versnellingsbak * @item.Brandstof * @item.Zitplaatsen zitplaatsen</p>
                             <p>prijs per dag: @item.prijs euro</p>
-                            <a href="#" class="btn btn-primary stretched-link">Bekijk Auto</a>
+                            <dt>
+                                @Html.ActionLink("Bekijk Auto", "GetCar", new { id = item.AutoID, begindatum = item.begindatum, einddatum = item.einddatum})
+                            </dt>
+                           
                         </div>
                     </div>
                 </div>

@@ -1,15 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@Html.BeginForm("GetAllcars", "Auto")
+@model AutoBoekingViewModel
 
 <!DOCTYPE html>
-<html>
+
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
     body, h1, h2, h3, h4, h5, h6 {
         font-family: "Raleway", Arial, Helvetica, sans-serif
@@ -24,30 +24,42 @@
             <div class="w3-container w3-blue">
                 <h2>Huur een auto bij jou in de buurt</h2>
             </div>
-            <div class="w3-container w3-white w3-padding-16">
-                <form action="/action_page.php" target="_blank">
-
-                    <div class="w3-row-padding" style="margin:8px -16px;">
-                        <div class="w3-half w3-margin-bottom">
-                            <label><i class="fa fa-location-arrow"></i> Locatie</label>
-                            <input class="w3-input w3-border" type="Text" placeholder="locatie" name="locatie">
-                        </div>
-                    </div>
+            <form action="/action_page.php" target="_blank">
+                <div class="w3-container w3-white w3-padding-16">
                     <div class="w3-row-padding" style="margin:0 -16px;">
                         <div class="w3-half w3-margin-bottom">
                             <label><i class="fa fa-calendar-o"></i> Ophalen</label>
-                            <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckIn" required>
+                            <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="begindatum" required>
                         </div>
                         <div class="w3-half">
                             <label><i class="fa fa-calendar-o"></i> terugbrengen</label>
-                            <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" name="CheckOut" required>
+                            <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="einddatum" required>
                         </div>
                     </div>
-                    <button class="w3-button w3-dark-grey" type="submit" onclick="location.href='@Url.Action("GetAllcars", "Auto")';return false;"><i class="fa fa-search w3-margin-right"></i> Zoek beschikbaarheid</button>
-                </form>
-            </div>
-        </div>
-    </header>
+                    <button class="w3-button w3-dark-grey" type="submit">Zoek beschikbaarheid</button>
+                </div>
+              </form>
+</header>
 </body>
 </html>
 
+@*<button class="w3-button w3-dark-grey" type="submit" onclick="location.href='@Url.Action("GetAllcars", "Auto")';return false;"><i class="fa fa-search w3-margin-right"></i> Zoek beschikbaarheid</button>*@
+@*<div class="w3-half w3-margin-bottom">
+        <label><i class="fa fa-calendar-o"></i> Ophalen</label>
+        <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="begindatum" id="begindatum" required>
+    </div>
+    <div class="w3-half">
+        <label><i class="fa fa-calendar-o"></i> terugbrengen</label>
+        <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="einddatum" id="einddatum" required>
+    </div>*@
+
+@*<div class="form-group">
+    <label asp-for="begindatum" class="control-label"></label>
+    <input asp-for="begindatum" type="date" class="form-control" />
+    <span asp-validation-for="begindatum" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="einddatum" class="control-label"></label>
+    <input asp-for="einddatum" type="date" class="form-control" />
+    <span asp-validation-for="einddatum" class="text-danger"></span>
+</div>*@

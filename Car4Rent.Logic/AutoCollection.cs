@@ -9,14 +9,15 @@ namespace Car4Rent.Logic
     {
         private IAutoDAL AutoDataAcces = AutoFactory.GetAutoDAL();
 
-        public List<Auto> GetAutos()
+        public List<Auto> GetAutos(string begindatum, string einddatum)
         {
             List<Auto> auto = new List<Auto>();
 
-            foreach (AutoDTO autoDTO in AutoDataAcces.GetAll())
+            foreach (AutoDTO autoDTO in AutoDataAcces.GetAll(begindatum, einddatum))
             {
                 auto.Add(new Auto
                 {
+                    AutoID = autoDTO.autoID,
                     type = autoDTO.type,
                     Merk = autoDTO.Merk,
                     Kenteken = autoDTO.Kenteken,
@@ -27,7 +28,7 @@ namespace Car4Rent.Logic
                     Versnellingsbak = autoDTO.Versnellingsbak,
                     Url = autoDTO.Url,
                     prijs = autoDTO.prijs
-                });
+                }) ;
             }
             return auto;
         }
@@ -63,6 +64,7 @@ namespace Car4Rent.Logic
         {
             return new AutoDTO
             {
+                
                 type = auto.type,
                 Merk = auto.Merk,
                 Kenteken = auto.Kenteken,

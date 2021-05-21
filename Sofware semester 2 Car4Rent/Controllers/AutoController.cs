@@ -5,20 +5,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sofware_semester_2_Car4Rent.Controllers
 {
     public class AutoController : Controller
     {
-        public IActionResult GetAllcars()
+
+
+        public IActionResult Index(string begindatum, string einddatum)
+        {
+            AutoBoekingViewModel Abvm = new AutoBoekingViewModel();
+            Abvm.begindatum = begindatum;
+            Abvm.einddatum = einddatum;
+            return View(Abvm);
+        }
+
+
+        [HttpPost]
+        public IActionResult GetAllcars(string begindatum, string einddatum)
         {
             AutoCollection autoCollection = new AutoCollection();
-            List<AutoViewModel> autoviewmodel = new List<AutoViewModel>();
+            List<AutoBoekingViewModel> autoBoekingViewModel = new List<AutoBoekingViewModel>();
 
-            foreach (Auto auto in autoCollection.GetAutos())
+            foreach (Auto auto in autoCollection.GetAutos(begindatum, einddatum))
             {
-                autoviewmodel.Add(new AutoViewModel
+                autoBoekingViewModel.Add(new AutoBoekingViewModel
                 {
+                    AutoID = auto.AutoID,
                     type = auto.type,
                     Merk = auto.Merk,
                     Kenteken = auto.Kenteken,
@@ -28,62 +42,75 @@ namespace Sofware_semester_2_Car4Rent.Controllers
                     Zitplaatsen = auto.Zitplaatsen,
                     Versnellingsbak = auto.Versnellingsbak,
                     url = auto.Url,
-                    prijs = auto.prijs
+                    prijs = auto.prijs,
+                    begindatum = begindatum,
+                    einddatum = einddatum,
+                    
                 });
+                
             }
-            return View(autoviewmodel);
+            return View(autoBoekingViewModel);
         }
 
-        public IActionResult GetCar(int id)
+
+        public IActionResult GetCar(int id, string begindatum, string einddatum)
         {
             AutoCollection autoCollection = new AutoCollection();
-            AutoViewModel autoViewModel = new AutoViewModel();
+            AutoBoekingViewModel autoBoekingViewModel = new AutoBoekingViewModel();
             Auto auto = new Auto();
             auto = autoCollection.GetAuto(id);
 
-            autoViewModel.AutoID = auto.AutoID;
-            autoViewModel.type = auto.type;
-            autoViewModel.Merk = auto.Merk;
-            autoViewModel.Kenteken = auto.Kenteken;
-            autoViewModel.bouwjaar = auto.bouwjaar;
-            autoViewModel.KM_stand = auto.KM_stand;
-            autoViewModel.Brandstof = auto.Brandstof;
-            autoViewModel.Zitplaatsen = auto.Zitplaatsen;
-            autoViewModel.Versnellingsbak = auto.Versnellingsbak;
-            autoViewModel.url = auto.Url;
-            autoViewModel.prijs = auto.prijs;
+            autoBoekingViewModel.AutoID = auto.AutoID;
+            autoBoekingViewModel.type = auto.type;
+            autoBoekingViewModel.Merk = auto.Merk;
+            autoBoekingViewModel.Kenteken = auto.Kenteken;
+            autoBoekingViewModel.bouwjaar = auto.bouwjaar;
+            autoBoekingViewModel.KM_stand = auto.KM_stand;
+            autoBoekingViewModel.Brandstof = auto.Brandstof;
+            autoBoekingViewModel.Zitplaatsen = auto.Zitplaatsen;
+            autoBoekingViewModel.Versnellingsbak = auto.Versnellingsbak;
+            autoBoekingViewModel.url = auto.Url;
+            autoBoekingViewModel.prijs = auto.prijs;
+            autoBoekingViewModel.begindatum = begindatum;
+            autoBoekingViewModel.einddatum = einddatum;
 
-            return View(autoViewModel);
+            return View(autoBoekingViewModel);
 
         }
 
 
-
-        public IActionResult ListProducts()
+        [HttpGet]
+        public bool checkAuto()
         {
-            AutoCollection AutoCollection = new AutoCollection();
-            List<AutoViewModel> autoViewModels = new List<AutoViewModel>();
-
-            foreach (Auto auto in AutoCollection.GetAutos())
-            {
-                autoViewModels.Add(new AutoViewModel
-                {
-                    type = auto.type,
-                    Merk = auto.Merk,
-                    Kenteken = auto.Kenteken,
-                    bouwjaar = auto.bouwjaar,
-                    KM_stand = auto.KM_stand,
-                    Brandstof = auto.Brandstof,
-                    Zitplaatsen = auto.Zitplaatsen,
-                    Versnellingsbak = auto.Versnellingsbak,
-                    url = auto.Url,
-                    prijs = auto.prijs
-
-                });
-            }
-            return View(autoViewModels);
-
+            bool test = true;
+            return test;
         }
+
+        //public IActionResult ListProducts()
+        //{
+        //    AutoCollection AutoCollection = new AutoCollection();
+        //    List<AutoViewModel> autoViewModels = new List<AutoViewModel>();
+
+        //    foreach (Auto auto in AutoCollection.GetAutos())
+        //    {
+        //        autoViewModels.Add(new AutoViewModel
+        //        {
+        //            type = auto.type,
+        //            Merk = auto.Merk,
+        //            Kenteken = auto.Kenteken,
+        //            bouwjaar = auto.bouwjaar,
+        //            KM_stand = auto.KM_stand,
+        //            Brandstof = auto.Brandstof,
+        //            Zitplaatsen = auto.Zitplaatsen,
+        //            Versnellingsbak = auto.Versnellingsbak,
+        //            url = auto.Url,
+        //            prijs = auto.prijs
+
+        //        });
+        //    }
+        //    return View(autoViewModels);
+
+        //}
 
         public IActionResult AutoToevoegen(AutoViewModel autoViewModel)
         {

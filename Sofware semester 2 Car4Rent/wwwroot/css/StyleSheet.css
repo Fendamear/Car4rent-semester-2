@@ -27,6 +27,15 @@ box {
     margin: 20px;
 }
 
+Test {
+    background-color: blue;
+    width: 45%;
+    padding: 0 10px;
+    margin: 22px;
+    float: left;
+}
+
+
 
 
 search {
