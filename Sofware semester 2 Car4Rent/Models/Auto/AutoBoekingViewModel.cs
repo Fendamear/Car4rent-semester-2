@@ -33,5 +33,9 @@ namespace Sofware_semester_2_Car4Rent.Models
         public string begindatum { get; set; }
 
         public string einddatum { get; set; }
+
+        public decimal Totaalprijs { get; set; }
+
+        public int TotaalDagen { get; set; }
     }
 }

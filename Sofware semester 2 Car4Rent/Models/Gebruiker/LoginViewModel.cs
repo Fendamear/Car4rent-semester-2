@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace Sofware_semester_2_Car4Rent.Models
+namespace Sofware_semester_2_Car4Rent.Models.Gebruiker
 {
-    public class DateViewModel
+    public class LoginViewModel
     {
         [Required]
-        public string begindatum { get; set; }
+        public string Email { get; set; }
+
         [Required]
-        public string einddatum { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -74,8 +74,9 @@ namespace Car4Rent.DAL
                                                $"VALUES (@AutoID, @VerhuurderID, @merk, @Type_, @KM_stand, @kenteken, @bouwjaar, @Brandstof, @Zitplaatsen, @Versnellingsbak, @url_, @prijs);");
 
             var query = new SqlCommand($"select MAX(AutoID) as AutoID from Auto_");
+            string column = "AutoID";
 
-            Autotoevoegen.Parameters.AddWithValue("@AutoID", dbs.GetmaxID(query));
+            Autotoevoegen.Parameters.AddWithValue("@AutoID", dbs.GetMaxID(query, column));
             Autotoevoegen.Parameters.AddWithValue("@VerhuurderID", 1);
             Autotoevoegen.Parameters.AddWithValue("@merk", autoDTO.Merk);
             Autotoevoegen.Parameters.AddWithValue("@Type_", autoDTO.type);
@@ -89,14 +90,6 @@ namespace Car4Rent.DAL
             Autotoevoegen.Parameters.AddWithValue("@prijs", autoDTO.prijs);
 
             dbs.ExecuteQuery(Autotoevoegen);
-        }
-
-
-
-        private AutoDTO getAutoId(AutoDTO autoDTO, DataRow datarow)
-        {
-            autoDTO.autoID = Convert.ToInt32(datarow["AutoID"]);
-            return autoDTO;
         }
     }
 }

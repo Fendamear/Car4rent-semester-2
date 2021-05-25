@@ -53,12 +53,11 @@ namespace Car4Rent.Logic
             };
         }
 
-
-
         public void Create(Auto auto)
         {
             AutoDataAcces.AutoToevoegen(AutoToDTO(auto));
         }
+
 
         private AutoDTO AutoToDTO(Auto auto)
         {

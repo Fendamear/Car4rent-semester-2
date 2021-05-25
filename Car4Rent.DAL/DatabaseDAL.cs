@@ -39,20 +39,21 @@ namespace Car4Rent.DAL
             query.Dispose();
         }
 
-        public int GetmaxID(SqlCommand query)
+        public int GetMaxID(SqlCommand query, string column)
         {
             query.Connection = _connection;
-            int AutoID = 0;
+            int id = 0;
             _connection.Open();
             using (SqlDataReader reader = query.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    AutoID = (int)reader["AutoID"];
+                    id = (int)reader[$"{column}"];
                 }
             }
             _connection.Close();
-            return AutoID + 1;
+            return id + 1;
         }
+
     }
 }

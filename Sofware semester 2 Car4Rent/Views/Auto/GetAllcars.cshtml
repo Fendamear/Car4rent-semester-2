@@ -82,10 +82,18 @@
                             <h1 class="card-title">@item.Merk @item.type</h1>
                             <p>@item.Versnellingsbak * @item.Brandstof * @item.Zitplaatsen zitplaatsen</p>
                             <p>prijs per dag: @item.prijs euro</p>
-                            <dt>
-                                @Html.ActionLink("Bekijk Auto", "GetCar", new { id = item.AutoID, begindatum = item.begindatum, einddatum = item.einddatum})
-                            </dt>
-                           
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <dt>
+                                    @Html.ActionLink("Bekijk Auto", "GetCar", new { id = item.AutoID, begindatum = item.begindatum, einddatum = item.einddatum })
+                                </dt>
+                            }
+                else
+                {
+                    <p>Je moet inloggen om deze aute te kunnen bekijken!</p>
+                }
+
+
                         </div>
                     </div>
                 </div>

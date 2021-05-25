@@ -17,5 +17,6 @@ namespace Sofware_semester_2_Car4Rent.Models
 
         public int status { get; set; }
 
+
     }
 }

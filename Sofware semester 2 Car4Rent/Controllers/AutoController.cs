@@ -58,6 +58,9 @@ namespace Sofware_semester_2_Car4Rent.Controllers
             AutoCollection autoCollection = new AutoCollection();
             AutoBoekingViewModel autoBoekingViewModel = new AutoBoekingViewModel();
             Auto auto = new Auto();
+            DateTime StartDate = Convert.ToDateTime(begindatum);
+            DateTime EndDate = Convert.ToDateTime(einddatum);
+            int TotaalDagen = (EndDate - StartDate).Days;
             auto = autoCollection.GetAuto(id);
 
             autoBoekingViewModel.AutoID = auto.AutoID;
@@ -73,17 +76,11 @@ namespace Sofware_semester_2_Car4Rent.Controllers
             autoBoekingViewModel.prijs = auto.prijs;
             autoBoekingViewModel.begindatum = begindatum;
             autoBoekingViewModel.einddatum = einddatum;
+            autoBoekingViewModel.TotaalDagen = TotaalDagen;
+            autoBoekingViewModel.Totaalprijs = auto.prijs * TotaalDagen;
 
             return View(autoBoekingViewModel);
 
-        }
-
-
-        [HttpGet]
-        public bool checkAuto()
-        {
-            bool test = true;
-            return test;
         }
 
         //public IActionResult ListProducts()
