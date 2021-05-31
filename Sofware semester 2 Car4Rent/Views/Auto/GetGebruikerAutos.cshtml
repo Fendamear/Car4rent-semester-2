@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Sofware_semester_2_Car4Rent.Models.AutoViewModel>
+
+@{
+    ViewData["Title"] = "GetGebruikerAutos";
+}
+
+<h1>GetGebruikerAutos</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Merk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kenteken)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bouwjaar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KM_stand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brandstof)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zitplaatsen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Versnellingsbak)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prijs)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Merk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kenteken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bouwjaar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KM_stand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brandstof)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zitplaatsen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Versnellingsbak)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prijs)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AutoID }) |
+                @Html.ActionLink("Delete", "DeleteAuto", new { id = item.AutoID})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

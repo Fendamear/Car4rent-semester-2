@@ -83,6 +83,35 @@ namespace Sofware_semester_2_Car4Rent.Controllers
 
         }
 
+        public IActionResult GetGebruikerAutos()
+        {
+            Gebruiker gebruiker = new Gebruiker
+            {
+                GebruikerID = Convert.ToInt32(User.Claims.First(claim => claim.Type == "ID").Value)
+            };
+
+            List<AutoViewModel> autoViewModel = new List<AutoViewModel>();
+
+            foreach (Auto auto in gebruiker.GetAutosByGebruiker())
+            {
+                autoViewModel.Add(new AutoViewModel
+                {
+                    AutoID = auto.AutoID,
+                    type = auto.type,
+                    Merk = auto.Merk,
+                    Kenteken = auto.Kenteken,
+                    bouwjaar = auto.bouwjaar,
+                    KM_stand = auto.KM_stand,
+                    Brandstof = auto.Brandstof,
+                    Zitplaatsen = auto.Zitplaatsen,
+                    Versnellingsbak = auto.Versnellingsbak,
+                    url = auto.Url,
+                    prijs = auto.prijs,
+                });
+            }
+            return View(autoViewModel);
+        }
+        
         //public IActionResult ListProducts()
         //{
         //    AutoCollection AutoCollection = new AutoCollection();
@@ -131,5 +160,49 @@ namespace Sofware_semester_2_Car4Rent.Controllers
 
             return RedirectToAction("GetAllcars", "Auto");
         }
+
+        public IActionResult DeleteAuto(int id)
+        {
+            AutoCollection autoCollection = new AutoCollection();
+            AutoViewModel autoViewModel = new AutoViewModel();
+            Auto auto = new Auto();
+
+            auto = autoCollection.GetAuto(id);
+
+            autoViewModel.AutoID = auto.AutoID;
+            autoViewModel.type = auto.type;
+            autoViewModel.Merk = auto.Merk;
+            autoViewModel.Kenteken = auto.Kenteken;
+            autoViewModel.bouwjaar = auto.bouwjaar;
+            autoViewModel.KM_stand = auto.KM_stand;
+            autoViewModel.Brandstof = auto.Brandstof;
+            autoViewModel.Zitplaatsen = auto.Zitplaatsen;
+            autoViewModel.Versnellingsbak = auto.Versnellingsbak;
+            autoViewModel.url = auto.Url;
+            autoViewModel.prijs = auto.prijs;
+
+            return View(autoViewModel);
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteAuto(AutoViewModel autoViewModel)
+        {
+            AutoCollection autoCollection = new AutoCollection();
+            if (!ModelState.IsValid) return View();
+
+            Auto auto = new Auto();
+            auto.AutoID = autoViewModel.AutoID;
+
+            autoCollection.Delete(auto);
+
+            return RedirectToAction("GetGebruikerAutos", "Auto");
+        }
+
+        //[HttpPost]
+        //public IActionResult UpdateAuto()
+        //{
+
+        //}
     }
 }

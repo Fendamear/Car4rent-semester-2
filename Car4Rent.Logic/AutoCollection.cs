@@ -33,6 +33,30 @@ namespace Car4Rent.Logic
             return auto;
         }
 
+        public List<Auto> GetGebruikerAutos(int id)
+        {
+            List<Auto> auto = new List<Auto>();
+
+            foreach (AutoDTO autoDTO in AutoDataAcces.GetAllByGebruiker(id))
+            {
+                auto.Add(new Auto
+                {
+                    AutoID = autoDTO.autoID,
+                    type = autoDTO.type,
+                    Merk = autoDTO.Merk,
+                    Kenteken = autoDTO.Kenteken,
+                    bouwjaar = autoDTO.bouwjaar,
+                    KM_stand = autoDTO.KM_stand,
+                    Brandstof = autoDTO.Brandstof,
+                    Zitplaatsen = autoDTO.Zitplaatsen,
+                    Versnellingsbak = autoDTO.Versnellingsbak,
+                    Url = autoDTO.Url,
+                    prijs = autoDTO.prijs
+                });
+            }
+            return auto;
+        }
+
         public Auto GetAuto(int id)
         {
             var autoDTO = AutoDataAcces.GetByID(id);
@@ -48,6 +72,10 @@ namespace Car4Rent.Logic
                 Brandstof = autoDTO.Brandstof,
                 Zitplaatsen = autoDTO.Zitplaatsen,
                 Versnellingsbak = autoDTO.Versnellingsbak,
+
+
+
+
                 Url = autoDTO.Url,
                 prijs = autoDTO.prijs
             };
@@ -58,6 +86,10 @@ namespace Car4Rent.Logic
             AutoDataAcces.AutoToevoegen(AutoToDTO(auto));
         }
 
+        public void Delete(Auto auto)
+        {
+            AutoDataAcces.Delete(AutoToDTO(auto));
+        }
 
         private AutoDTO AutoToDTO(Auto auto)
         {
@@ -76,13 +108,6 @@ namespace Car4Rent.Logic
                 prijs = auto.prijs
             };
         }
-
-
-
-
-
-
-
 
     }
 }

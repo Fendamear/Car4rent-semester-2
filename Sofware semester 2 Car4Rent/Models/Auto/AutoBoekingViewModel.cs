@@ -8,6 +8,7 @@ namespace Sofware_semester_2_Car4Rent.Models
 {
     public class AutoBoekingViewModel
     {
+
         public int AutoID { get; set; }
 
         public string type { get; set; }

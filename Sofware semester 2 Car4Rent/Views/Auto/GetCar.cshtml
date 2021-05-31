@@ -73,9 +73,6 @@
          @Html.ActionLink("Boek Auto!", "Create", "Boeking", new {AutoID = Model.AutoID, begindatum = Model.begindatum, einddatum = Model.einddatum, Totaalprijs = Model.Totaalprijs})
     </box>
 
-
-
-
     @section Scripts {
         @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     }

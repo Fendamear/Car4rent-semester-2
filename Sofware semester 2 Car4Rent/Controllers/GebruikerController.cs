@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using System.Security.Principal;
+
+
 
 
 namespace Sofware_semester_2_Car4Rent.Controllers
@@ -18,8 +21,10 @@ namespace Sofware_semester_2_Car4Rent.Controllers
     [Authorize]
     public class GebruikerController : Controller
     {
+
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -51,7 +56,8 @@ namespace Sofware_semester_2_Car4Rent.Controllers
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, Gebruiker.Naam),
-                        new Claim("ID", Convert.ToString(Gebruiker.GebruikerID))
+                        new Claim("ID", Convert.ToString(Gebruiker.GebruikerID)),
+                                              
                     };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -66,7 +72,6 @@ namespace Sofware_semester_2_Car4Rent.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid login");
                 return View();
             }
-
             return View();
         }
 
@@ -114,5 +119,6 @@ namespace Sofware_semester_2_Car4Rent.Controllers
 
             return RedirectToAction("Login", "Gebruiker");    
         }
+
     }
 }

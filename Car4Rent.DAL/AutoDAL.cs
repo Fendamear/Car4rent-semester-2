@@ -34,6 +34,25 @@ namespace Car4Rent.DAL
             return autoDTOs;
         }
 
+        public List<AutoDTO> GetAllByGebruiker(int id)
+        {
+            SqlCommand getAllByGebruiker = new SqlCommand($"select AutoID, VerhuurderID, merk, Type_, KM_stand, Kenteken, Bouwjaar, Brandstof, Zitplaatsen, Versnellingsbak, url_, prijs from Auto_ " +
+                                                          $"where verhuurderID = @id");
+
+            getAllByGebruiker.Parameters.AddWithValue("@id", id);
+
+            DataTable dataTable = dbs.Query(getAllByGebruiker);
+            List<AutoDTO> autoDTOs = new List<AutoDTO>();
+
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                AutoDTO autoDTO = new AutoDTO();
+                autoDTOs.Add(AutoDTOfill(autoDTO, dataRow));
+            }
+
+            return autoDTOs;
+        }
+
         public AutoDTO GetByID(int autoID)
         {
             SqlCommand getCar = new SqlCommand("select AutoID, merk,type_,KM_stand,Kenteken,Bouwjaar,Brandstof, Zitplaatsen, Versnellingsbak, url_, prijs from Auto_  WHERE AutoID = @AutoID");
@@ -90,6 +109,16 @@ namespace Car4Rent.DAL
             Autotoevoegen.Parameters.AddWithValue("@prijs", autoDTO.prijs);
 
             dbs.ExecuteQuery(Autotoevoegen);
+        }
+
+        public void Delete(AutoDTO autoDTO)
+        {
+            SqlCommand deleteProduct = new SqlCommand($"Delete FROM Auto_" +
+                                                      $"where AutoID = @AutoID");
+
+            deleteProduct.Parameters.AddWithValue("@AutoID", autoDTO.autoID);
+
+            dbs.ExecuteQuery(deleteProduct);
         }
     }
 }

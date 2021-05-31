@@ -1,0 +1,87 @@
+﻿@model Sofware_semester_2_Car4Rent.Models.AutoViewModel
+
+@{
+    ViewData["Title"] = "Delete Auto";
+}
+
+<h1>DeleteAuto</h1>
+
+<div>
+    <h4>AutoViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AutoID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AutoID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.type)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Merk)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Merk)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kenteken)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kenteken)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.bouwjaar)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.bouwjaar)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KM_stand)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KM_stand)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Brandstof)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Brandstof)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zitplaatsen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zitplaatsen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Versnellingsbak)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Versnellingsbak)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.url)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.url)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.prijs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.prijs)
+        </dd>
+    </dl>
+</div>
+    <form asp-action="DeleteAuto">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="GetGebruikerAutos">Terug naar mijn Auto's</a>
+    </form>    
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>*@
+

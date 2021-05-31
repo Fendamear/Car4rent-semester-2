@@ -8,12 +8,9 @@ namespace Car4rent.Factory
 {
     public class AutoFactory
     {
-
         public static IAutoDAL GetAutoDAL()
         {
             return new AutoDAL();
         }
-
-
     }
 }

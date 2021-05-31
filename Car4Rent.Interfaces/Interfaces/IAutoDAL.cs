@@ -9,8 +9,11 @@ namespace Car4Rent.Interfaces.Interfaces
     {
         List<AutoDTO> GetAll(string begindatum, string einddatum);
 
+        List<AutoDTO> GetAllByGebruiker(int id);
+
         AutoDTO GetByID(int autoID);
         void AutoToevoegen(AutoDTO autoDTO);
 
+        void Delete(AutoDTO autoDTO);
     }
 }
