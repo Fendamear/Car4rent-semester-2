@@ -111,12 +111,12 @@ namespace Car4Rent.DAL
             dbs.ExecuteQuery(Autotoevoegen);
         }
 
-        public void Delete(AutoDTO autoDTO)
+        public void Delete(int AutoID)
         {
             SqlCommand deleteProduct = new SqlCommand($"Delete FROM Auto_" +
                                                       $"where AutoID = @AutoID");
 
-            deleteProduct.Parameters.AddWithValue("@AutoID", autoDTO.autoID);
+            deleteProduct.Parameters.AddWithValue("@AutoID", AutoID);
 
             dbs.ExecuteQuery(deleteProduct);
         }

@@ -164,24 +164,24 @@ namespace Sofware_semester_2_Car4Rent.Controllers
         public IActionResult DeleteAuto(int id)
         {
             AutoCollection autoCollection = new AutoCollection();
-            AutoViewModel autoViewModel = new AutoViewModel();
-            Auto auto = new Auto();
 
-            auto = autoCollection.GetAuto(id);
+            autoCollection.Delete(id);
 
-            autoViewModel.AutoID = auto.AutoID;
-            autoViewModel.type = auto.type;
-            autoViewModel.Merk = auto.Merk;
-            autoViewModel.Kenteken = auto.Kenteken;
-            autoViewModel.bouwjaar = auto.bouwjaar;
-            autoViewModel.KM_stand = auto.KM_stand;
-            autoViewModel.Brandstof = auto.Brandstof;
-            autoViewModel.Zitplaatsen = auto.Zitplaatsen;
-            autoViewModel.Versnellingsbak = auto.Versnellingsbak;
-            autoViewModel.url = auto.Url;
-            autoViewModel.prijs = auto.prijs;
+            return RedirectToAction("GetGebruikerAutos", "Auto");
 
-            return View(autoViewModel);
+            //autoViewModel.AutoID = auto.AutoID;
+            //autoViewModel.type = auto.type;
+            //autoViewModel.Merk = auto.Merk;
+            //autoViewModel.Kenteken = auto.Kenteken;
+            //autoViewModel.bouwjaar = auto.bouwjaar;
+            //autoViewModel.KM_stand = auto.KM_stand;
+            //autoViewModel.Brandstof = auto.Brandstof;
+            //autoViewModel.Zitplaatsen = auto.Zitplaatsen;
+            //autoViewModel.Versnellingsbak = auto.Versnellingsbak;
+            //autoViewModel.url = auto.Url;
+            //autoViewModel.prijs = auto.prijs;
+
+            //return View(autoViewModel);
         }
 
 
@@ -194,7 +194,7 @@ namespace Sofware_semester_2_Car4Rent.Controllers
             Auto auto = new Auto();
             auto.AutoID = autoViewModel.AutoID;
 
-            autoCollection.Delete(auto);
+            //autoCollection.Delete(auto);
 
             return RedirectToAction("GetGebruikerAutos", "Auto");
         }

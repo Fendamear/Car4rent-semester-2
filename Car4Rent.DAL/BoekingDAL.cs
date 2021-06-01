@@ -4,6 +4,7 @@ using System.Text;
 using Car4Rent.Interfaces.Interfaces;
 using Car4Rent.Interfaces.DTO;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Car4Rent.DAL
 {
@@ -28,6 +29,38 @@ namespace Car4Rent.DAL
             BoekingToevoegen.Parameters.AddWithValue("@prijs", boekingDTO.TotaalPrijs);
 
             dbs.ExecuteQuery(BoekingToevoegen);
+        }
+
+        public List<BoekingDTO> GetAllByGebruiker(int id)
+        {
+            SqlCommand getAllByGebruiker = new SqlCommand($"select BoekingNr, AutoID, HuurderID, Begindatum, Einddatum, BoekingDatum, prijs from Boeking" +
+                                                          $"where HuurderID = @id");
+
+            getAllByGebruiker.Parameters.AddWithValue("@id", id);
+
+            DataTable dataTable = dbs.Query(getAllByGebruiker);
+            List<BoekingDTO> boekingDTOs = new List<BoekingDTO>();
+
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                BoekingDTO boekingDTO = new BoekingDTO();
+                boekingDTOs.Add(BoekingDTOfill(boekingDTO, dataRow));
+            }
+
+            return boekingDTOs;
+        }
+
+        private BoekingDTO BoekingDTOfill(BoekingDTO boekingDTO, DataRow datarow)
+        {
+            boekingDTO.ID = Convert.ToInt32(datarow["BoekingNr"]);
+            boekingDTO.AutoID = Convert.ToInt32(datarow["AutoID"]);
+            boekingDTO.Huurder = Convert.ToInt32(datarow["HuurderID"]);
+            boekingDTO.TotaalPrijs = Convert.ToInt32(datarow["prijs"]);
+            boekingDTO.Begindatum = Convert.ToString(datarow["Begindatum"]);
+            boekingDTO.Einddatum = Convert.ToString(datarow["Einddatum"]);
+            boekingDTO.BoekingDatum = Convert.ToString(datarow["BoekingDatum"]);
+
+            return boekingDTO;
         }
     }
 }

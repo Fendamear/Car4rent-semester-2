@@ -8,5 +8,7 @@ namespace Car4Rent.Interfaces.Interfaces
     public interface IBoekingDAL
     {
         void BoekingToevoegen(BoekingDTO boekingDTO);
+
+        List<BoekingDTO> GetAllByGebruiker(int id);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Car4Rent.Interfaces.Interfaces;
 using Car4rent.Factory;
+using Car4Rent.Interfaces.DTO;
 using Car4Rent.Interfaces;
 
 namespace Car4Rent.Logic
@@ -24,6 +25,7 @@ namespace Car4Rent.Logic
         public string regio { get; set; }
 
         private IAutoDAL AutoDataAcces = AutoFactory.GetAutoDAL();
+        private IBoekingDAL BoekingDataAcces = BoekingFactory.GetBoekingDAL();
 
         public List<Auto> GetAutosByGebruiker()
         {
@@ -50,5 +52,25 @@ namespace Car4Rent.Logic
 
         }
 
+        public List<Boeking> GetBoekingByGebruiker()
+        {
+            List<Boeking> boeking = new List<Boeking>();
+
+            foreach (BoekingDTO boekingDTO in BoekingDataAcces.GetAllByGebruiker(GebruikerID))
+            {
+                boeking.Add(new Boeking
+                {
+                    ID = boekingDTO.ID,
+                    AutoID = boekingDTO.AutoID,
+                    Huurder = boekingDTO.Huurder,
+                    Begindatum = boekingDTO.Begindatum,
+                    Einddatum = boekingDTO.Einddatum,
+                    BoekingDatum = boekingDTO.BoekingDatum,
+                    TotaalPrijs = boekingDTO.TotaalPrijs
+                });
+            }
+            return boeking;
+
+        }
     }
 }

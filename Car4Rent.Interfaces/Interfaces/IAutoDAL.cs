@@ -14,6 +14,6 @@ namespace Car4Rent.Interfaces.Interfaces
         AutoDTO GetByID(int autoID);
         void AutoToevoegen(AutoDTO autoDTO);
 
-        void Delete(AutoDTO autoDTO);
+        void Delete(int AutoID);
     }
 }

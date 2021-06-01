@@ -86,9 +86,9 @@ namespace Car4Rent.Logic
             AutoDataAcces.AutoToevoegen(AutoToDTO(auto));
         }
 
-        public void Delete(Auto auto)
+        public void Delete(int autoID)
         {
-            AutoDataAcces.Delete(AutoToDTO(auto));
+            AutoDataAcces.Delete(autoID);
         }
 
         private AutoDTO AutoToDTO(Auto auto)

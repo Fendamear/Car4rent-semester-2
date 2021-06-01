@@ -31,7 +31,24 @@ namespace Sofware_semester_2_Car4Rent.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult GetGebruikerBoeking()
+        {
+            Gebruiker gebruiker = new Gebruiker
+            {
+                GebruikerID = Convert.ToInt32(User.Claims.First(claim => claim.Type == "ID").Value)
+            };
 
+            List<BoekingViewModel> boekingViewModel = new List<BoekingViewModel>();
+
+            foreach (Auto auto in gebruiker.GetAutosByGebruiker())
+            {
+                boekingViewModel.Add(new BoekingViewModel
+                {
+                    
+                });
+            }
+            return View(boekingViewModel);
+        }
 
     }
 }
