@@ -237,9 +237,10 @@ namespace Sofware_semester_2_Car4Rent.Controllers
         [HttpPost]
         public IActionResult UpdateAuto(AutoViewModel autoViewModel)
         {
-            if (ModelState.IsValid) return View();
+            if (!ModelState.IsValid) return View();
             Auto auto = new Auto();
 
+            auto.AutoID = autoViewModel.AutoID;
             auto.type = autoViewModel.type;
             auto.Merk = autoViewModel.Merk;
             auto.Kenteken = autoViewModel.Kenteken;

@@ -123,25 +123,25 @@ namespace Car4Rent.DAL
 
         public void Update(AutoDTO autoDTO)
         {
-            SqlCommand updateAuto = new SqlCommand("Update Auto " +
-                                                    "SET merk = @Merk, Type_ = @Type, KM_stand, @KM_stand, Bouwjaar = @Bouwjaar, Brandstof = @Brandstof, Zitplaatsen = @Zitplaatsen, Versnellingsbak = @Versnellingsbak, url_ = @url, prijs = @prijs" +
+            SqlCommand updateAuto = new SqlCommand("Update Auto_ " +
+                                                    "SET merk = @Merk, Type_ = @Type, KM_stand, @KM_stand, Bouwjaar = @Bouwjaar, Brandstof = @Brandstof, Zitplaatsen = @Zitplaatsen, Versnellingsbak = @Versnellingsbak, url_ = @url, prijs = @prijs " +
                                                     "where AutoID = @AutoID");
 
 
             updateAuto.Parameters.AddWithValue("@Merk", autoDTO.autoID);
-            updateAuto.Parameters.AddWithValue("@Type", autoDTO.autoID);
-            updateAuto.Parameters.AddWithValue("@KM_Stand", autoDTO.autoID);
-            updateAuto.Parameters.AddWithValue("@Bouwjaar", autoDTO.autoID);
-            updateAuto.Parameters.AddWithValue("@Brandstof", autoDTO.autoID);
-            updateAuto.Parameters.AddWithValue("@Zitplaatsen", autoDTO.autoID);
-            updateAuto.Parameters.AddWithValue("@Versnellingsbak", autoDTO.autoID);
-            updateAuto.Parameters.AddWithValue("@url", autoDTO.autoID);
-            updateAuto.Parameters.AddWithValue("@prijs", autoDTO.autoID);
+            updateAuto.Parameters.AddWithValue("@Type", autoDTO.type);
+            updateAuto.Parameters.AddWithValue("@KM_Stand", autoDTO.KM_stand);
+            updateAuto.Parameters.AddWithValue("@Bouwjaar", autoDTO.bouwjaar);
+            updateAuto.Parameters.AddWithValue("@Brandstof", autoDTO.Brandstof);
+            updateAuto.Parameters.AddWithValue("@Zitplaatsen", autoDTO.Zitplaatsen);
+            updateAuto.Parameters.AddWithValue("@Versnellingsbak", autoDTO.Versnellingsbak);
+            updateAuto.Parameters.AddWithValue("@url", autoDTO.Url);
+            updateAuto.Parameters.AddWithValue("@prijs", autoDTO.prijs);
 
             dbs.ExecuteQuery(updateAuto);
         }
 
-        //            select BoekingNr, b.AutoID, b.HuurderID as huurder, a.Merk, a.type_ as type, b.Begindatum, b.Einddatum, b.boekingDatum, b.prijs from Boeking b
+        //select BoekingNr, b.AutoID, b.HuurderID as huurder, a.Merk, a.type_ as type, b.Begindatum, b.Einddatum, b.boekingDatum, b.prijs from Boeking b
         //inner join Auto_ a on b.AutoID = a.AutoID
         //where b.AutoID in (select distinct b.AutoID from boeking b
         //where '2021-06-02' <= b.Einddatum and b.Begindatum <= '2021-06-12')

@@ -42,7 +42,7 @@ namespace Car4Rent.Logic
                 Versnellingsbak = auto.Versnellingsbak,
                 Url = auto.Url,
                 prijs = auto.prijs
-            })
+            });
         }
 
 
