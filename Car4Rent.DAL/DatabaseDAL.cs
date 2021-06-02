@@ -6,7 +6,11 @@ namespace Car4Rent.DAL
 {
     public class DatabaseDAL
     {
-        static string connectionstring = "Data Source=DESKTOP-PERRQVJ;Initial Catalog=Car4Rent Software sem 2;Integrated Security=True";
+        //pc
+        //static string connectionstring = "Data Source=DESKTOP-PERRQVJ;Initial Catalog=Car4Rent Software sem 2;Integrated Security=True";
+        //laptop
+        static string connectionstring = @"Data Source=LAPTOP-RPKE8E4N\SQLEXPRESS;Initial Catalog=Car4Rent Software sem 2;Integrated Security=True";
+
         private SqlConnection _connection = new SqlConnection(connectionstring);
 
         public DatabaseDAL()

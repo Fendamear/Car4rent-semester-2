@@ -58,7 +58,6 @@ namespace Sofware_semester_2_Car4Rent.Controllers
         }
 
 
-
         public IActionResult ListProducts()
         {
             AutoCollection AutoCollection = new AutoCollection();
