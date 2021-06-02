@@ -95,7 +95,7 @@ namespace Car4Rent.Logic
         {
             return new AutoDTO
             {
-                
+                autoID = auto.AutoID,
                 type = auto.type,
                 Merk = auto.Merk,
                 Kenteken = auto.Kenteken,

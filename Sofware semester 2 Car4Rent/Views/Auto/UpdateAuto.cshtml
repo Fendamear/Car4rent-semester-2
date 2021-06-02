@@ -1,25 +1,31 @@
 ﻿@model Sofware_semester_2_Car4Rent.Models.AutoViewModel
 
 @{
-    ViewData["Title"] = "AutoToevoegen";
+    ViewData["Title"] = "UpdateAuto";
 }
 
-<h1>Een auto aanmelden</h1>
+<h1>UpdateAuto</h1>
 
+<h4>AutoViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AutoToevoegen">
+        <form asp-action="UpdateAuto">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Merk" class="control-label"></label>
-                <input asp-for="Merk" class="form-control" />
-                <span asp-validation-for="Merk" class="text-danger"></span>
+                <label asp-for="AutoID" class="control-label"></label>
+                <input asp-for="AutoID" class="form-control" />
+                <span asp-validation-for="AutoID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="type" class="control-label"></label>
                 <input asp-for="type" class="form-control" />
                 <span asp-validation-for="type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Merk" class="control-label"></label>
+                <input asp-for="Merk" class="form-control" />
+                <span asp-validation-for="Merk" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Kenteken" class="control-label"></label>
@@ -36,38 +42,21 @@
                 <input asp-for="KM_stand" class="form-control" />
                 <span asp-validation-for="KM_stand" class="text-danger"></span>
             </div>
-
-            <select class="form-control" id="Brandstof" name="Brandstof">
+            <div class="form-group">
                 <label asp-for="Brandstof" class="control-label"></label>
-                <option>Kies brandstof</option>
-                <option>Benzine</option>
-                <option>Diesel</option>
-                <option>Elektrisch</option>
-                <option>Gas</option>
+                <input asp-for="Brandstof" class="form-control" />
                 <span asp-validation-for="Brandstof" class="text-danger"></span>
-            </select>
-            <select class="form-control" id="Versnellingsbak" name="Versnellingsbak">
-                <label asp-for="Versnellingsbak" class="control-label"></label>
-                <option>Kies Versnellingsbak</option>
-                <option>Handmatig</option>
-                <option>Automatisch</option>
-                <option>Semi-Automatisch</option>
-                <span asp-validation-for="Versnellingsbak" class="text-danger"></span>
-            </select>
-            <select class="form-control" id="Zitplaatsen" name="Zitplaatsen">
+            </div>
+            <div class="form-group">
                 <label asp-for="Zitplaatsen" class="control-label"></label>
-                <option>Kies Aantal zitplaaten</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <span asp-validation-for="Zitplaatsen" text-danger"></span>
-            </select>
+                <input asp-for="Zitplaatsen" class="form-control" />
+                <span asp-validation-for="Zitplaatsen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Versnellingsbak" class="control-label"></label>
+                <input asp-for="Versnellingsbak" class="form-control" />
+                <span asp-validation-for="Versnellingsbak" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="url" class="control-label"></label>
                 <input asp-for="url" class="form-control" />
@@ -79,7 +68,7 @@
                 <span asp-validation-for="prijs" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

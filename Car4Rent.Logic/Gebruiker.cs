@@ -63,6 +63,8 @@ namespace Car4Rent.Logic
                     ID = boekingDTO.ID,
                     AutoID = boekingDTO.AutoID,
                     Huurder = boekingDTO.Huurder,
+                    Type = boekingDTO.Type,
+                    Merk = boekingDTO.Merk,
                     Begindatum = boekingDTO.Begindatum,
                     Einddatum = boekingDTO.Einddatum,
                     BoekingDatum = boekingDTO.BoekingDatum,

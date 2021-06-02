@@ -1,4 +1,6 @@
 ﻿using System;
+using Car4Rent.Interfaces;
+using Car4rent.Factory;
 
 namespace Car4Rent.Logic
 {
@@ -24,5 +26,26 @@ namespace Car4Rent.Logic
         public string Url { get; set; }
 
         public decimal prijs { get; set; }
+
+        public void Update(Auto auto)
+        {
+            AutoFactory.GetAutoDAL().Update(new AutoDTO
+            {
+                autoID = auto.AutoID,
+                type = auto.type,
+                Merk = auto.Merk,
+                Kenteken = auto.Kenteken,
+                bouwjaar = auto.bouwjaar,
+                KM_stand = auto.KM_stand,
+                Brandstof = auto.Brandstof,
+                Zitplaatsen = auto.Zitplaatsen,
+                Versnellingsbak = auto.Versnellingsbak,
+                Url = auto.Url,
+                prijs = auto.prijs
+            })
+        }
+
+
+
     }
 }

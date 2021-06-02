@@ -10,6 +10,9 @@ namespace Car4Rent.Logic
 
         public int AutoID {get; set;}
 
+        public string Merk { get; set; }
+
+        public string Type { get; set; }
         public int Huurder { get; set; }
 
         public string Begindatum { get; set; }

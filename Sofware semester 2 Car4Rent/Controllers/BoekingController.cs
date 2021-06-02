@@ -19,8 +19,9 @@ namespace Sofware_semester_2_Car4Rent.Controllers
         {
             BoekingCollection boekingCollection = new BoekingCollection();
 
+            if (!ModelState.IsValid) return View();
+          
             Boeking boeking = new Boeking();
-
             boeking.AutoID = AutoID;
             boeking.Begindatum = begindatum;
             boeking.Einddatum = einddatum;
@@ -28,7 +29,7 @@ namespace Sofware_semester_2_Car4Rent.Controllers
 
             boekingCollection.Create(boeking);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetGebruikerBoeking", "Boeking");
         }
 
         public IActionResult GetGebruikerBoeking()
@@ -40,14 +41,83 @@ namespace Sofware_semester_2_Car4Rent.Controllers
 
             List<BoekingViewModel> boekingViewModel = new List<BoekingViewModel>();
 
-            foreach (Auto auto in gebruiker.GetAutosByGebruiker())
+            foreach (Boeking boeking in gebruiker.GetBoekingByGebruiker())
             {
                 boekingViewModel.Add(new BoekingViewModel
                 {
-                    
+                    ID = boeking.ID,
+                    AutoID = boeking.AutoID,
+                    HuurderID = boeking.Huurder,
+                    Type = boeking.Type,
+                    Merk = boeking.Merk,
+                    begindatum = boeking.Begindatum,
+                    einddatum = boeking.Einddatum,
+                    BoekingDatum = boeking.BoekingDatum,
+                    prijs = boeking.TotaalPrijs
                 });
             }
             return View(boekingViewModel);
+        }
+
+        public IActionResult DeleteBoeking(int id)
+        {
+            BoekingCollection boekingCollection = new BoekingCollection();
+            BoekingViewModel boekingViewModel = new BoekingViewModel();
+            Boeking boeking = new Boeking();
+            boeking = boekingCollection.GetBoeking(id);
+
+            boekingViewModel.ID = boeking.ID;
+            boekingViewModel.AutoID = boeking.AutoID;
+            boekingViewModel.HuurderID = boeking.Huurder;
+            boekingViewModel.Type = boeking.Type;
+            boekingViewModel.Merk = boeking.Merk;
+            boekingViewModel.begindatum = boeking.Begindatum;
+            boekingViewModel.einddatum = boeking.Einddatum;
+            boekingViewModel.BoekingDatum = boeking.BoekingDatum;
+            boekingViewModel.prijs = boeking.TotaalPrijs;
+
+            return View(boekingViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteBoeking(BoekingViewModel boekingViewModel)
+        {
+            BoekingCollection boekingCollection = new BoekingCollection();
+
+            if (!ModelState.IsValid) return View();
+
+            Boeking boeking = new Boeking();
+            boeking.ID = boekingViewModel.ID;
+
+            boekingCollection.Delete(boeking);
+
+            return RedirectToAction("GetGebruikerBoeking", "Boeking");
+        }
+
+        public IActionResult UpdateBoeking(int id)
+        {
+            BoekingCollection boekingCollection = new BoekingCollection();
+            BoekingViewModel boekingViewModel = new BoekingViewModel();
+            Boeking boeking = new Boeking();
+            boeking = boekingCollection.GetBoeking(id);
+
+            boekingViewModel.ID = boeking.ID;
+            boekingViewModel.AutoID = boeking.AutoID;
+            boekingViewModel.HuurderID = boeking.Huurder;
+            boekingViewModel.Type = boeking.Type;
+            boekingViewModel.Merk = boeking.Merk;
+            boekingViewModel.begindatum = boeking.Begindatum;
+            boekingViewModel.einddatum = boeking.Einddatum;
+            boekingViewModel.BoekingDatum = boeking.BoekingDatum;
+            boekingViewModel.prijs = boeking.TotaalPrijs;
+
+            return View(boekingViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateBoeking(BoekingViewModel boekingViewModel)
+        {
+            return View();
         }
 
     }

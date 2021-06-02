@@ -13,6 +13,10 @@ namespace Car4Rent.Interfaces.DTO
         public int Huurder { get; set; }
 
         public string Begindatum { get; set; }
+
+        public string Type { get; set; }
+
+        public string Merk { get; set; }
         public string Einddatum { get; set; }
         public string BoekingDatum { get; set; }
 

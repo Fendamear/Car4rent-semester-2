@@ -7,8 +7,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace Sofware_semester_2_Car4Rent.Controllers
 {
+
     public class AutoController : Controller
     {
 
@@ -25,31 +27,42 @@ namespace Sofware_semester_2_Car4Rent.Controllers
         [HttpPost]
         public IActionResult GetAllcars(string begindatum, string einddatum)
         {
-            AutoCollection autoCollection = new AutoCollection();
-            List<AutoBoekingViewModel> autoBoekingViewModel = new List<AutoBoekingViewModel>();
-
-            foreach (Auto auto in autoCollection.GetAutos(begindatum, einddatum))
+            if(ModelState.IsValid)
             {
-                autoBoekingViewModel.Add(new AutoBoekingViewModel
+                AutoCollection autoCollection = new AutoCollection();
+                List<AutoBoekingViewModel> autoBoekingViewModel = new List<AutoBoekingViewModel>();
+                DateTime StartDate = Convert.ToDateTime(begindatum);
+                DateTime EndDate = Convert.ToDateTime(einddatum);
+
+                if (EndDate > StartDate)
                 {
-                    AutoID = auto.AutoID,
-                    type = auto.type,
-                    Merk = auto.Merk,
-                    Kenteken = auto.Kenteken,
-                    bouwjaar = auto.bouwjaar,
-                    KM_stand = auto.KM_stand,
-                    Brandstof = auto.Brandstof,
-                    Zitplaatsen = auto.Zitplaatsen,
-                    Versnellingsbak = auto.Versnellingsbak,
-                    url = auto.Url,
-                    prijs = auto.prijs,
-                    begindatum = begindatum,
-                    einddatum = einddatum,
-                    
-                });
-                
+                    foreach (Auto auto in autoCollection.GetAutos(begindatum, einddatum))
+                    {
+                        autoBoekingViewModel.Add(new AutoBoekingViewModel
+                        {
+                            AutoID = auto.AutoID,
+                            type = auto.type,
+                            Merk = auto.Merk,
+                            Kenteken = auto.Kenteken,
+                            bouwjaar = auto.bouwjaar,
+                            KM_stand = auto.KM_stand,
+                            Brandstof = auto.Brandstof,
+                            Zitplaatsen = auto.Zitplaatsen,
+                            Versnellingsbak = auto.Versnellingsbak,
+                            url = auto.Url,
+                            prijs = auto.prijs,
+                            begindatum = begindatum,
+                            einddatum = einddatum,
+
+                        });
+
+                    }
+                    return View(autoBoekingViewModel);
+                }
+                ModelState.AddModelError(string.Empty, "Einddatum mag niet voor de begindatum zijn!");
+                return BadRequest("Einddatum mag niet voor de begindatum zijn!!");
             }
-            return View(autoBoekingViewModel);
+            return BadRequest();            
         }
 
 
@@ -184,7 +197,6 @@ namespace Sofware_semester_2_Car4Rent.Controllers
             //return View(autoViewModel);
         }
 
-
         [HttpPost]
         public IActionResult DeleteAuto(AutoViewModel autoViewModel)
         {
@@ -199,10 +211,50 @@ namespace Sofware_semester_2_Car4Rent.Controllers
             return RedirectToAction("GetGebruikerAutos", "Auto");
         }
 
-        //[HttpPost]
-        //public IActionResult UpdateAuto()
-        //{
+        public IActionResult UpdateAuto(int id)
+        {
+            AutoCollection autoCollection = new AutoCollection();
+            AutoViewModel autoViewModel = new AutoViewModel();
+            Auto auto = new Auto();
 
-        //}
+            auto = autoCollection.GetAuto(id);
+
+            autoViewModel.AutoID = auto.AutoID;
+            autoViewModel.type = auto.type;
+            autoViewModel.Merk = auto.Merk;
+            autoViewModel.Kenteken = auto.Kenteken;
+            autoViewModel.bouwjaar = auto.bouwjaar;
+            autoViewModel.KM_stand = auto.KM_stand;
+            autoViewModel.Brandstof = auto.Brandstof;
+            autoViewModel.Zitplaatsen = auto.Zitplaatsen;
+            autoViewModel.Versnellingsbak = auto.Versnellingsbak;
+            autoViewModel.url = auto.Url;
+            autoViewModel.prijs = auto.prijs;
+
+            return View(autoViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAuto(AutoViewModel autoViewModel)
+        {
+            if (ModelState.IsValid) return View();
+            Auto auto = new Auto();
+
+            auto.type = autoViewModel.type;
+            auto.Merk = autoViewModel.Merk;
+            auto.Kenteken = autoViewModel.Kenteken;
+            auto.bouwjaar = autoViewModel.bouwjaar;
+            auto.KM_stand = autoViewModel.KM_stand;
+            auto.Brandstof = autoViewModel.Brandstof;
+            auto.Zitplaatsen = autoViewModel.Zitplaatsen;
+            auto.Versnellingsbak = autoViewModel.Versnellingsbak;
+            auto.Url = autoViewModel.url;
+            auto.prijs = autoViewModel.prijs;
+
+            auto.Update(auto);
+            return RedirectToAction("GetGebruikerAutos", "Auto");
+        }
+
+        
     }
 }

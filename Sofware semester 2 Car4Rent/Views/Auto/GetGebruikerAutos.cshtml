@@ -4,10 +4,10 @@
     ViewData["Title"] = "GetGebruikerAutos";
 }
 
-<h1>GetGebruikerAutos</h1>
+<h1>Auto's van @User.Identity.Name</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="AutoToevoegen">Een Auto toevoegen</a>
 </p>
 <table class="table">
     <thead>
@@ -73,7 +73,7 @@
                 @Html.DisplayFor(modelItem => item.prijs)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AutoID }) |
+                @Html.ActionLink("Update Auto", "UpdateAuto", new { id = item.AutoID }) |
                 @Html.ActionLink("Delete", "DeleteAuto", new { id = item.AutoID})
             </td>
         </tr>

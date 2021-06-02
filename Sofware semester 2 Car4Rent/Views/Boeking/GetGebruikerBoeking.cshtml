@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Sofware_semester_2_Car4Rent.Models.BoekingViewModel>
+
+@{
+    ViewData["Title"] = "GetGebruikerBoeking";
+}
+
+<h1>Boekingen van @User.Identity.Name</h1>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Home")">Zoek een auto!</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.AutoID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HuurderID)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Merk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.begindatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.einddatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BoekingDatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prijs)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.AutoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HuurderID)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Merk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.begindatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.einddatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoekingDatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prijs)
+            </td>
+            <td>
+                <a class="btn btn-primary" href="@Url.ActionLink("UpdateBoeking", "Boeking", new { id = item.ID })">Wijzigen</a>
+
+                <a class="btn btn-danger" href="@Url.ActionLink("DeleteBoeking", "Boeking", new { id = item.ID})">Verwijderen</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
