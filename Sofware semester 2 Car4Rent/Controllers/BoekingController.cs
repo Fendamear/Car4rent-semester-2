@@ -115,8 +115,40 @@ namespace Sofware_semester_2_Car4Rent.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateBoeking(BoekingViewModel boekingViewModel)
+        public IActionResult UpdateBoeking(BoekingViewModel bvm)
         {
+            if (!ModelState.IsValid) return View();
+            Boeking boeking = new Boeking();
+
+            if(boeking.CheckIfUpdateIsPossible(bvm.AutoID, bvm.begindatum, bvm.einddatum))
+            {
+                AutoCollection autoCollection = new AutoCollection();
+                Auto auto = new Auto();
+                auto = autoCollection.GetAuto(bvm.AutoID);
+
+                DateTime StartDate = Convert.ToDateTime(bvm.begindatum);
+                DateTime EndDate = Convert.ToDateTime(bvm.einddatum);
+                int TotaalDagen = (EndDate - StartDate).Days;
+
+                boeking.ID = bvm.ID;
+                boeking.AutoID = bvm.AutoID;
+                boeking.Huurder = bvm.HuurderID;
+                boeking.Merk = bvm.Merk;
+                boeking.Type = bvm.Type;
+                boeking.Begindatum = bvm.begindatum;
+                boeking.Einddatum = bvm.einddatum;
+                boeking.BoekingDatum = bvm.BoekingDatum;
+                boeking.TotaalPrijs = auto.prijs * TotaalDagen;
+
+                boeking.Update(boeking);
+                return RedirectToAction("GetGebruikerBoeking", "Boeking");
+            }
+            ModelState.AddModelError(string.Empty, "Op deze datum is deze auto niet beschikbaar!");
+            
+
+
+
+
             return View();
         }
 

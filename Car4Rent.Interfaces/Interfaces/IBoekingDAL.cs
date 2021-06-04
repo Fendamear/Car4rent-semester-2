@@ -12,5 +12,9 @@ namespace Car4Rent.Interfaces.Interfaces
         BoekingDTO GetByID(int id);
 
         void Delete(BoekingDTO boekingDTO);
+
+        void Update(BoekingDTO boekingDTO);
+
+        bool CheckUpdateDAL(int id, string begindatum, string einddatum);
     }
 }

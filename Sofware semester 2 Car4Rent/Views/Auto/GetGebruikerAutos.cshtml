@@ -73,8 +73,7 @@
                 @Html.DisplayFor(modelItem => item.prijs)
             </td>
             <td>
-                @Html.ActionLink("Update Auto", "UpdateAuto", new { id = item.AutoID }) |
-                @Html.ActionLink("Delete", "DeleteAuto", new { id = item.AutoID})
+                <a class="btn btn-primary" href="@Url.ActionLink("UpdateAuto", "Auto", new { id = item.AutoID })">Wijzigen</a>
             </td>
         </tr>
 }

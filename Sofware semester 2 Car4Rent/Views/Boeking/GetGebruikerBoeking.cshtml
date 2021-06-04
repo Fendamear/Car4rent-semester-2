@@ -33,9 +33,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.einddatum)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.BoekingDatum)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.prijs)
             </th>
@@ -66,15 +66,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.einddatum)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.BoekingDatum)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.prijs)
             </td>
             <td>
                 <a class="btn btn-primary" href="@Url.ActionLink("UpdateBoeking", "Boeking", new { id = item.ID })">Wijzigen</a>
-
                 <a class="btn btn-danger" href="@Url.ActionLink("DeleteBoeking", "Boeking", new { id = item.ID})">Verwijderen</a>
             </td>
         </tr>

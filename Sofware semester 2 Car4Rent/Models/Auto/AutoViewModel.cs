@@ -30,7 +30,6 @@ namespace Sofware_semester_2_Car4Rent.Models
         [Required]
         public string url { get; set; }
         [Required]
-
         public decimal prijs { get; set; }
     }
 }

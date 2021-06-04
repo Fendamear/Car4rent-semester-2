@@ -69,6 +69,59 @@ namespace Car4Rent.DAL
 
             return boekingDTO;
         }
+       
+
+        public void Delete(BoekingDTO boekingDTO)
+        {
+            SqlCommand DeleteBoeking = new SqlCommand("DELETE from Boeking " +
+                                                      "where BoekingNr = @BoekingNr");
+
+            DeleteBoeking.Parameters.AddWithValue("@BoekingNr", boekingDTO.ID);
+
+            dbs.ExecuteQuery(DeleteBoeking);
+        }
+
+        public bool CheckUpdateDAL(int id, string begindatum, string einddatum)
+        {
+            string test = "select distinct autoID, iif(AutoID not in (select distinct AutoID from boeking " +
+                          "where '@begindatum' <= Einddatum and Begindatum <= '@einddatum'), 'true', 'false') as available from boeking " +
+                         "where autoID = @autoID";
+
+            SqlCommand Checkupdate = new SqlCommand("select distinct autoID, iif(AutoID not in (select distinct AutoID from boeking " +
+                                                    "where @begindatum <= Einddatum and Begindatum <= @einddatum), 'true', 'false') as available from boeking " +
+                                                    "where autoID = @autoID");
+
+            Checkupdate.Parameters.AddWithValue("@begindatum", begindatum);
+            Checkupdate.Parameters.AddWithValue("@einddatum", einddatum);
+            Checkupdate.Parameters.AddWithValue("@autoID", id);
+
+            DataTable dataTable = dbs.Query(Checkupdate);
+            bool updateAvailable;
+
+            DataRow dataRow = dataTable.Rows[0];
+            updateAvailable = Convert.ToBoolean(dataRow["available"]);
+
+            return updateAvailable;
+        }
+
+        public void Update(BoekingDTO boekingDTO)
+        {
+            SqlCommand updateBoeking = new SqlCommand("Update Boeking " +
+                                                      $"SET AutoID = @AutoID, HuurderID = @HuurderID, Begindatum = @Begindatum, Einddatum = @einddatum, boekingdatum = @Boekingdatum, prijs = @prijs " +
+                                                      $"where BoekingNr = @BoekingNr");
+
+            updateBoeking.Parameters.AddWithValue("@BoekingNr", boekingDTO.ID);
+            updateBoeking.Parameters.AddWithValue("@AutoID", boekingDTO.AutoID);
+            updateBoeking.Parameters.AddWithValue("@HuurderID", boekingDTO.Huurder);
+            updateBoeking.Parameters.AddWithValue("@Begindatum", boekingDTO.Begindatum);
+            updateBoeking.Parameters.AddWithValue("@einddatum", boekingDTO.Einddatum);
+            updateBoeking.Parameters.AddWithValue("@boekingdatum", boekingDTO.BoekingDatum);
+            updateBoeking.Parameters.AddWithValue("@prijs", boekingDTO.TotaalPrijs);
+
+            dbs.ExecuteQuery(updateBoeking);
+        }
+
+
         private BoekingDTO BoekingDTOfill(BoekingDTO boekingDTO, DataRow datarow)
         {
             boekingDTO.ID = Convert.ToInt32(datarow["BoekingNr"]);
@@ -82,16 +135,6 @@ namespace Car4Rent.DAL
             boekingDTO.BoekingDatum = Convert.ToString(datarow["BoekingDatum"]);
 
             return boekingDTO;
-        }
-
-        public void Delete(BoekingDTO boekingDTO)
-        {
-            SqlCommand DeleteBoeking = new SqlCommand("DELETE from Boeking " +
-                                                      "where BoekingNr = @BoekingNr");
-
-            DeleteBoeking.Parameters.AddWithValue("@BoekingNr", boekingDTO.ID);
-
-            dbs.ExecuteQuery(DeleteBoeking);
         }
     }
 }

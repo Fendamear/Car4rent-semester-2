@@ -123,12 +123,18 @@ namespace Car4Rent.DAL
 
         public void Update(AutoDTO autoDTO)
         {
+            string teststring = "Update Auto_ " +
+                                "SET merk = @Merk, Type_ = @Type, KM_stand, @KM_stand, Bouwjaar = @Bouwjaar, Brandstof = @Brandstof, Zitplaatsen = @Zitplaatsen, Versnellingsbak = @Versnellingsbak, url_ = @url, prijs = @prijs " +
+                                "where AutoID = @AutoID";
+
+            Console.WriteLine(teststring);
+
             SqlCommand updateAuto = new SqlCommand("Update Auto_ " +
-                                                    "SET merk = @Merk, Type_ = @Type, KM_stand, @KM_stand, Bouwjaar = @Bouwjaar, Brandstof = @Brandstof, Zitplaatsen = @Zitplaatsen, Versnellingsbak = @Versnellingsbak, url_ = @url, prijs = @prijs " +
+                                                    "SET merk = @Merk, Type_ = @Type, KM_stand = @KM_stand, Bouwjaar = @Bouwjaar, Brandstof = @Brandstof, Zitplaatsen = @Zitplaatsen, Versnellingsbak = @Versnellingsbak, url_ = @url, prijs = @prijs " +
                                                     "where AutoID = @AutoID");
 
-
-            updateAuto.Parameters.AddWithValue("@Merk", autoDTO.autoID);
+            updateAuto.Parameters.AddWithValue("@AutoId", autoDTO.autoID);
+            updateAuto.Parameters.AddWithValue("@Merk", autoDTO.Merk);
             updateAuto.Parameters.AddWithValue("@Type", autoDTO.type);
             updateAuto.Parameters.AddWithValue("@KM_Stand", autoDTO.KM_stand);
             updateAuto.Parameters.AddWithValue("@Bouwjaar", autoDTO.bouwjaar);
